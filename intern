@@ -1,0 +1,97 @@
+npm install -g create-react-app
+npx create-react-app education-template
+npx create-react-app restaurant-template
+npx create-react-app ecommerce-template
+npx create-react-app content-creator-template
+src/
+  components/
+    Header.js
+    Footer.js
+    ContactForm.js
+  pages/
+    Home.js
+    About.js
+    Services.js
+    Gallery.js
+    Contact.js
+  App.js
+  index.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Gallery from './pages/Gallery';
+import Contact from './pages/Contact';
+
+function App() {
+  return (
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/services" component={Services} />
+        <Route path="/gallery" component={Gallery} />
+        <Route path="/contact" component={Contact} />
+      </Switch>
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;
+import React, { useState } from 'react';
+
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Implement form submission logic, e.g., using a backend API or service like Formspree.
+    console.log(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+      </label>
+      <label>
+        Email:
+        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+      </label>
+      <label>
+        Message:
+        <textarea name="message" value={formData.message} onChange={handleChange} required></textarea>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default ContactForm;
+"homepage": https://{username}.github.io/{repository-name}
+npm install gh-pages --save-dev
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+}
+git init
+git remote add origin https://github.com/{username}/{repository-name}.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+npm run deploy
